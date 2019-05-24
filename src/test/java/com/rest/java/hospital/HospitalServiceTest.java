@@ -75,7 +75,7 @@ public class HospitalServiceTest {
 		Hospital hosp = new Hospital();
 		HospitalDto dto = new HospitalDto();
 		hosp = mapDtoToEntity(dto);
-		hosp.setHospId(1);
+		hosp.setHospId(null);
 		hosp.setName("appolo");
 		hosp.setEmail("appolo@test.com");
 		hosp.setPhone("132456789");

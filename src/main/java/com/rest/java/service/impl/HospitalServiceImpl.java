@@ -3,6 +3,8 @@ package com.rest.java.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,8 +14,6 @@ import com.rest.java.dto.HospitalDto;
 import com.rest.java.entity.Hospital;
 import com.rest.java.exception.HospitalCustomException;
 import com.rest.java.service.HospitalService;
-
-
 
 /**
  * This is the Service class which can implements HospitalService interface and
@@ -26,27 +26,32 @@ import com.rest.java.service.HospitalService;
 @Service
 public class HospitalServiceImpl implements HospitalService {
 
+	Logger log = LoggerFactory.getLogger(Hospital.class);
+
 	@Autowired
 	private HospitalDao dao;
 
 	@Override
 	public HospitalDto saveHospital(HospitalDto dto) {
 
-		Hospital hospital = mapDtoToEntity(dto);
+		try {
+			Hospital hospital = mapDtoToEntity(dto);
 
-		Hospital h = dao.addHospital(hospital);
-	
+			Hospital h = dao.addHospital(hospital);
 
-		if (hospital.getHospId() != null) {
+			if (hospital.getHospId() != null) {
 
-			System.out.println("hosptial added: " + h);
+				System.out.println("hosptial added: " + h);
 
-			return mapEntityToDto(h);
+				return mapEntityToDto(h);
 
-		} else {
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			log.error("hospial can't be add");
 			throw new HospitalCustomException();
 		}
-		
 
 	}
 
@@ -57,48 +62,49 @@ public class HospitalServiceImpl implements HospitalService {
 
 		hospital = dao.updateHospital(hospital);
 
-		dto = mapEntityToDto(hospital);
+		if (hospital.getHospId() != null) {
 
-		return dto;
+			dto = mapEntityToDto(hospital);
+
+			System.out.println("hospital updated"+hospital);
+
+			return dto;
+		} else {
+			log.error("hospital cann't be updated with id= " + hospital.getHospId());
+			throw new HospitalCustomException(hospital.getHospId());
+		}
+
 	}
 
 	@Override
 
-
 	public HospitalDto deleteHospital(Integer id) {
-
 
 		Hospital hospital = dao.deleteHospital(id);
 		try {
 
+			if (hospital.getHospId() != null) {
 
-		if (hospital.getHospId() != null) {
+				HospitalDto dto = mapEntityToDto(hospital);
 
-			HospitalDto dto = mapEntityToDto(hospital);
+				System.out.println("hospital deleted: " + hospital);
 
-			System.out.println("hospital deleted: " + hospital);
-			
-			return dto;
-		} else {
-			throw new HospitalCustomException();
-		}
-		}catch (Exception e) {
-		
+				return dto;
+			} else {
+				throw new HospitalCustomException();
+			}
+		} catch (Exception e) {
+			log.error("hospital id not found for delete= " + id);
 			throw new HospitalCustomException(id);
 		}
-
-
-
-
 
 	}
 
 	@Override
 
-
 	public HospitalDto getHospitalById(Integer id) {
 
-
+		try {
 		Hospital hospital = dao.getOneHospital(id);
 
 		if (hospital.getHospId() != null) {
@@ -106,10 +112,14 @@ public class HospitalServiceImpl implements HospitalService {
 			HospitalDto dto = mapEntityToDto(hospital);
 
 			System.out.println("hospital by I'd: " + hospital);
-			
+
 			return dto;
 		} else {
 			return null;
+		}
+		}catch (Exception e) {
+			log.error("hospital not found: "+id);
+			throw new HospitalCustomException(id);
 		}
 	}
 
@@ -164,7 +174,6 @@ public class HospitalServiceImpl implements HospitalService {
 		return dto;
 	}
 
-
 	/*
 	 * @Transactional public Hospital addHospital(HospitalDto hospDto) {
 	 * 
@@ -189,6 +198,5 @@ public class HospitalServiceImpl implements HospitalService {
 	 * list = dao.findAllHospitals(); //return list; return null; }
 	 * 
 	 */
-
 
 }

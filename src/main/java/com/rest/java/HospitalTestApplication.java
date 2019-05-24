@@ -25,9 +25,6 @@ public class HospitalTestApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(HospitalTestApplication.class, args);
-
-		
-		SpringApplication.run(HospitalTestApplication.class, args);
 		
 		log.debug("application started...");
 

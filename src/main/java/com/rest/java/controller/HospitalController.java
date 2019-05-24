@@ -36,7 +36,7 @@ import com.rest.java.service.HospitalService;
 @Validated
 public class HospitalController {
 
-	public static final Logger log = LoggerFactory.getLogger(Hospital.class);
+	Logger log = LoggerFactory.getLogger(Hospital.class);
 
 	@Autowired
 	private HospitalService service;
@@ -50,18 +50,14 @@ public class HospitalController {
 	@PostMapping("/addHospital")
 	public ResponseEntity<HospitalDto> addHospital(@Valid @RequestBody HospitalDto dto) {
 
-		try {
-			HospitalDto hospital = service.saveHospital(dto);
-			if (hospital != null) {
-				log.info("Post api is called....");
-				return new ResponseEntity<HospitalDto>(hospital, HttpStatus.OK);
-			} else {
-				return new ResponseEntity<HospitalDto>(HttpStatus.BAD_REQUEST);
-			}
-		} catch (Exception e) {
-			log.error("something is wrong");
-			throw new HospitalCustomException();
+		HospitalDto hospital = service.saveHospital(dto);
+		if (hospital != null) {
+			log.info("Post api is called....");
+			return new ResponseEntity<HospitalDto>(hospital, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<HospitalDto>(HttpStatus.BAD_REQUEST);
 		}
+
 	}
 
 	/**
@@ -70,21 +66,15 @@ public class HospitalController {
 	 * @param id
 	 * @return Response contains Hospital information.
 	 */
-	@GetMapping(value = "/getHospital/{id}")
+	@GetMapping(value = "/hospitalId/{id}")
 	public ResponseEntity<HospitalDto> getOneHospital(@PathVariable("id") int id) {
 
-		try {
-			HospitalDto hospital = service.getHospitalById(id);
-			if (hospital.getHospId() != null) {
-				log.info("Get Api is called for id= " + id);
-				return new ResponseEntity<HospitalDto>(hospital, HttpStatus.OK);
-			} else {
-				return new ResponseEntity<HospitalDto>(HttpStatus.NOT_FOUND);
-			}
-		} catch (Exception e) {
-			log.error("hospital not found id = " + id);
-			throw new HospitalCustomException(id);
-
+		HospitalDto hospital = service.getHospitalById(id);
+		if (hospital.getHospId() != null) {
+			log.info("Get Api is called for id= " + id);
+			return new ResponseEntity<HospitalDto>(hospital, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<HospitalDto>(HttpStatus.NOT_FOUND);
 		}
 
 	}
@@ -99,11 +89,10 @@ public class HospitalController {
 	public ResponseEntity<HospitalDto> deleteHospitalById(@PathVariable("id") int id) {
 
 		HospitalDto hospital = service.deleteHospital(id);
-		if (hospital.getHospId() != null) {
+		if (hospital != null) {
 			log.info("Delete Api is called for id= " + id);
 			return new ResponseEntity<HospitalDto>(hospital, HttpStatus.OK);
 		} else {
-			log.error("hospital not found"+id);
 			return new ResponseEntity<HospitalDto>(HttpStatus.BAD_REQUEST);
 		}
 
@@ -141,23 +130,16 @@ public class HospitalController {
 	 * @param dto
 	 * @return returns the updated HospitalDto
 	 */
-
-
 	@PutMapping("updateHospital")
 	public ResponseEntity<HospitalDto> updateHospital(@Valid @RequestBody HospitalDto dto) {
 		HospitalDto hospital = service.updateHospital(dto);
-
-		if (hospital.getHospId() == null)
-			return new ResponseEntity<HospitalDto>(HttpStatus.LENGTH_REQUIRED);
-		try {
+		if (hospital != null) {
 			log.info("Update api is called for Update The hospital ");
 			return new ResponseEntity<HospitalDto>(hospital, HttpStatus.OK);
-		} catch (Exception e) {
-			log.error("hospital can't be updated");
-			throw new HospitalCustomException();
+		} else {
+			return new ResponseEntity<HospitalDto>(HttpStatus.BAD_REQUEST);
 		}
 
-
 	}
-	
+
 }
