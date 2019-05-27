@@ -88,6 +88,7 @@ public class HospitalServiceTest {
 
 	}
 
+
 	public Hospital mapDtoToEntity(HospitalDto dto) {
 		Hospital hosp = new Hospital();
 		hosp.setHospId(dto.getHospId());
