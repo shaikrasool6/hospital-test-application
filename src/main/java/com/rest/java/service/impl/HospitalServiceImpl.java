@@ -26,7 +26,7 @@ import com.rest.java.service.HospitalService;
 @Service
 public class HospitalServiceImpl implements HospitalService {
 
-	Logger log = LoggerFactory.getLogger(Hospital.class);
+	private final Logger log = LoggerFactory.getLogger(HospitalServiceImpl.class);
 
 	@Autowired
 	private HospitalDao dao;
@@ -43,14 +43,15 @@ public class HospitalServiceImpl implements HospitalService {
 
 				System.out.println("hosptial added: " + h);
 
+				log.debug("save hospital called");
 				return mapEntityToDto(h);
 
 			} else {
-				return null;
+				throw new HospitalCustomException();
 			}
 		} catch (Exception e) {
-			log.error("hospial can't be add");
-			throw new HospitalCustomException();
+			log.error("hospial unable to create. A hospital with the name'"+dto.getName()+"' already exists");
+			throw new HospitalCustomException(dto.getName());
 		}
 
 	}
@@ -66,8 +67,8 @@ public class HospitalServiceImpl implements HospitalService {
 
 			dto = mapEntityToDto(hospital);
 
-			System.out.println("hospital updated"+hospital);
-
+			System.out.println("hospital updated" + hospital);
+			log.debug("update hospital called");
 			return dto;
 		} else {
 			log.error("hospital cann't be updated with id= " + hospital.getHospId());
@@ -88,7 +89,7 @@ public class HospitalServiceImpl implements HospitalService {
 				HospitalDto dto = mapEntityToDto(hospital);
 
 				System.out.println("hospital deleted: " + hospital);
-
+				log.debug("delete hospital called");
 				return dto;
 			} else {
 				throw new HospitalCustomException();
@@ -105,20 +106,20 @@ public class HospitalServiceImpl implements HospitalService {
 	public HospitalDto getHospitalById(Integer id) {
 
 		try {
-		Hospital hospital = dao.getOneHospital(id);
+			Hospital hospital = dao.getOneHospital(id);
 
-		if (hospital.getHospId() != null) {
+			if (hospital.getHospId() != null) {
 
-			HospitalDto dto = mapEntityToDto(hospital);
+				HospitalDto dto = mapEntityToDto(hospital);
 
-			System.out.println("hospital by I'd: " + hospital);
-
-			return dto;
-		} else {
-			return null;
-		}
-		}catch (Exception e) {
-			log.error("hospital not found: "+id);
+				System.out.println("hospital by I'd: " + hospital);
+				log.debug("getHospitalById called");
+				return dto;
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			log.error("hospital not found: " + id);
 			throw new HospitalCustomException(id);
 		}
 	}
@@ -135,7 +136,7 @@ public class HospitalServiceImpl implements HospitalService {
 			HospitalDto dto = new HospitalDto();
 
 			BeanUtils.copyProperties(hList.get(i), dto);
-
+			log.debug("ListofAllHosptials called");
 			dtos.add(dto);
 		}
 
@@ -174,29 +175,6 @@ public class HospitalServiceImpl implements HospitalService {
 		return dto;
 	}
 
-	/*
-	 * @Transactional public Hospital addHospital(HospitalDto hospDto) {
-	 * 
-	 * return dao.addHospital(hospDto); }
-	 * 
-	 * @Transactional public Hospital updateHospital(HospitalDto hospDto) { for
-	 * (Hospital hosp : hospitals) { if (hosp.getHospId() == hospDto.getHospId()) {
-	 * hosp.setName(hospDto.getName()); hosp.setEmail(hospDto.getEmail());
-	 * hosp.setPhone(hospDto.getPhone()); hosp.setFax(hospDto.getFax()); return
-	 * hosp; } } //return dao.updateHospital(hospDto); return null; }
-	 * 
-	 * @Transactional public void delteHospotalById(int id) { // TODO Auto-generated
-	 * method stub
-	 * 
-	 * }
-	 * 
-	 * @Transactional(readOnly = true) public Hospital findHospialById(int id) { for
-	 * (Hospital hosp : hospitals) { if (hosp.getHospId() == id) { return hosp; } }
-	 * return null; }
-	 * 
-	 * //@Transactional public List<Hospital> findAllHospitals() { //List<Hospital>
-	 * list = dao.findAllHospitals(); //return list; return null; }
-	 * 
-	 */
+	
 
 }

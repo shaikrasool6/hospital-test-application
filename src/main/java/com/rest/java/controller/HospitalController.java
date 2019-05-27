@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,7 +32,6 @@ import com.rest.java.service.HospitalService;
  */
 @RestController
 @RequestMapping("/hospital")
-@Validated
 public class HospitalController {
 
 	Logger log = LoggerFactory.getLogger(Hospital.class);
@@ -89,7 +87,7 @@ public class HospitalController {
 	public ResponseEntity<HospitalDto> deleteHospitalById(@PathVariable("id") int id) {
 
 		HospitalDto hospital = service.deleteHospital(id);
-		if (hospital != null) {
+		if (hospital.getHospId() != null) {
 			log.info("Delete Api is called for id= " + id);
 			return new ResponseEntity<HospitalDto>(hospital, HttpStatus.OK);
 		} else {

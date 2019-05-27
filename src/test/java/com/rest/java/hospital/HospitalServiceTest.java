@@ -31,7 +31,7 @@ public class HospitalServiceTest {
 		HospitalDto dto = new HospitalDto();
 		hosp = mapDtoToEntity(dto);
 		hosp.setHospId(1);
-		hosp.setName("appolo");
+		hosp.setName("ap");
 		hosp.setEmail("appolo@test.com");
 		hosp.setPhone("132456789");
 		hosp.setFax("12345678");
@@ -75,7 +75,7 @@ public class HospitalServiceTest {
 		Hospital hosp = new Hospital();
 		HospitalDto dto = new HospitalDto();
 		hosp = mapDtoToEntity(dto);
-		hosp.setHospId(null);
+		hosp.setHospId(1);
 		hosp.setName("appolo");
 		hosp.setEmail("appolo@test.com");
 		hosp.setPhone("132456789");

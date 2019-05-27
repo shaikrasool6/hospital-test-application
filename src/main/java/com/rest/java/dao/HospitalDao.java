@@ -55,6 +55,8 @@ public interface HospitalDao {
 	 * @return the return List of Hospitals
 	 */
 	public List<Hospital> getAllHospitals();
+	
+	
 
 
 }
