@@ -91,5 +91,4 @@ public class HospitalDaoImpl implements HospitalDao {
 		return q.list();
 	}
 
-
 }

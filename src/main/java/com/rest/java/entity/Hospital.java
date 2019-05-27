@@ -176,7 +176,6 @@ public class Hospital implements Serializable {
 		final int prime = 31;
 		int result = 1;
 
-
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((fax == null) ? 0 : fax.hashCode());
 		result = prime * result + hospId;

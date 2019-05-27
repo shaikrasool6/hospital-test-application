@@ -11,10 +11,6 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
-
-
-
-
 public class HospitalDto implements Serializable {
 
 	/**
@@ -36,7 +32,7 @@ public class HospitalDto implements Serializable {
 
 	@Size(min = 3, max = 20, message = "Name must be between 3 and 20 characters")
 	@NotNull(message = "it is already exists...please try to make sure ")
-	@NotEmpty(message="please provide a name")
+	@NotEmpty(message = "please provide a name")
 	private String name;
 
 	/**
@@ -46,7 +42,7 @@ public class HospitalDto implements Serializable {
 	@NotBlank
 	@Email(message = "Please provide a valid email address")
 	@Pattern(regexp = ".+@.+\\..+", message = "Please provide a valid email address")
-	@NotEmpty(message="please provide a email")
+	@NotEmpty(message = "please provide a email")
 	private String email;
 
 	/**
@@ -105,9 +101,9 @@ public class HospitalDto implements Serializable {
 		this.name = name;
 	}
 
-    /**
-     * @return the Hospital's email
-     */
+	/**
+	 * @return the Hospital's email
+	 */
 
 	/**
 	 * Gets the hospital's email
@@ -115,15 +111,13 @@ public class HospitalDto implements Serializable {
 	 * @return A String representing the hospital's email
 	 */
 
-
 	public String getEmail() {
 		return email;
 	}
 
-	/**  
-	    * @param new Email A variable of type String.  
-	    */  
-
+	/**
+	 * @param new Email A variable of type String.
+	 */
 
 	/**
 	 * Sets the hospital's email
@@ -135,19 +129,16 @@ public class HospitalDto implements Serializable {
 		this.email = email;
 	}
 
-
-
-    /**
-     * @return the Hospital's phone 
-     */
+	/**
+	 * @return the Hospital's phone
+	 */
 	public String getPhone() {
 		return phone;
 	}
-	/**  
-	    * @param new phone A variable of type String.  
-	    */  
 
-
+	/**
+	 * @param new phone A variable of type String.
+	 */
 
 	/**
 	 * Sets the hospital's phone number
@@ -159,25 +150,21 @@ public class HospitalDto implements Serializable {
 		this.phone = phone;
 	}
 
-
 	/**
 	 * @return the Hospital's fax
-
-	/**
-	 * Gets the hospital's fax number
+	 * 
+	 *         /** Gets the hospital's fax number
 	 * 
 	 * @return A String representing the hospital's fax number
-
+	 * 
 	 */
 	public String getFax() {
 		return fax;
 	}
 
-	
-	/**  
-	    * @param new fax A variable of type String.  
-	    */  
-
+	/**
+	 * @param new fax A variable of type String.
+	 */
 
 	/**
 	 * Sets the hospital's fax number
@@ -195,7 +182,6 @@ public class HospitalDto implements Serializable {
 		final int prime = 31;
 		int result = 1;
 
-	
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((fax == null) ? 0 : fax.hashCode());
 		result = prime * result + hospId;
@@ -238,13 +224,10 @@ public class HospitalDto implements Serializable {
 		return true;
 	}
 
-
 	@Override
 	public String toString() {
 		return "HospitalDto [hospId=" + hospId + ", name=" + name + ", email=" + email + ", phone=" + phone + ", fax="
 				+ fax + "]";
 	}
-	
-
 
 }

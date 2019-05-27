@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.rest.java.dto.HospitalDto;
 import com.rest.java.entity.Hospital;
+
 /**
  * This is the interface and which extends BaseDao<HospitalDto, Hospital>
  * interface, the HospitalService interface contains five abstract methods these

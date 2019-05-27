@@ -50,7 +50,7 @@ public class HospitalServiceImpl implements HospitalService {
 				throw new HospitalCustomException();
 			}
 		} catch (Exception e) {
-			log.error("hospial unable to create. A hospital with the name'"+dto.getName()+"' already exists");
+			log.error("hospial unable to create. A hospital with the name'" + dto.getName() + "' already exists");
 			throw new HospitalCustomException(dto.getName());
 		}
 
@@ -174,7 +174,5 @@ public class HospitalServiceImpl implements HospitalService {
 		dto.setPhone(entity.getPhone());
 		return dto;
 	}
-
-	
 
 }

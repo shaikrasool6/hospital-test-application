@@ -13,8 +13,6 @@ public class HospitalCustomException extends RuntimeException {
 
 	public HospitalCustomException(String name) {
 		super("hospital unable to create with the name is already exsits");
-		}
+	}
 
 }
-
-
