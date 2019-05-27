@@ -1,8 +1,0 @@
-2019-05-27 14:30:05 [main] INFO  c.r.j.hospital.HospitalServiceTest - Starting HospitalServiceTest on ShaikR-PC-190 with PID 4688 (started by Shaik in D:\practice\myworkspace\hospital-test-application)
-2019-05-27 14:30:05 [main] DEBUG c.r.j.hospital.HospitalServiceTest - Running with Spring Boot v1.5.20.RELEASE, Spring v4.3.23.RELEASE
-2019-05-27 14:30:05 [main] INFO  c.r.j.hospital.HospitalServiceTest - The following profiles are active: dev
-2019-05-27 14:30:11 [main] INFO  c.r.j.hospital.HospitalServiceTest - Started HospitalServiceTest in 6.717 seconds (JVM running for 7.58)
-2019-05-27 14:30:11 [main] DEBUG c.r.j.s.impl.HospitalServiceImpl - getHospitalById called
-2019-05-27 14:30:11 [main] DEBUG c.r.j.s.impl.HospitalServiceImpl - update hospital called
-2019-05-27 14:30:11 [main] DEBUG c.r.j.s.impl.HospitalServiceImpl - save hospital called
-2019-05-27 14:30:11 [main] DEBUG c.r.j.s.impl.HospitalServiceImpl - delete hospital called
