@@ -109,7 +109,7 @@ public class HospitalController {
 		List<HospitalDto> hospitals = service.getAllHospitals();
 		try {
 			if (hospitals == null || hospitals.isEmpty()) {
-				log.error("no hospital are avilable");
+				log.warn("no hospital are avilable");
 				return new ResponseEntity<List<HospitalDto>>(hospitals, HttpStatus.NO_CONTENT);
 			} else {
 

@@ -62,6 +62,7 @@ public class Hospital implements Serializable {
 
 	@Column(length = 12, nullable = false, unique = true)
 	private String fax;
+	
 
 	/**
 	 * 
