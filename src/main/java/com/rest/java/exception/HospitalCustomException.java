@@ -8,11 +8,11 @@ public class HospitalCustomException extends RuntimeException {
 	}
 
 	public HospitalCustomException() {
-		super("Hospitals unable to create");
+		super("Hospitals are not registred...");
 	}
 
 	public HospitalCustomException(String name) {
-		super("hospital unable to create with the name is already exsits");
+		super("hospital unable to create with the name '"+name+"' is already exsits  ");
 	}
 
 }
