@@ -10,15 +10,15 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
+/**
+ * This is the class Represents HospitalDto.
+ * 
+ * @author Shaik
+ * 
+ */
 
 public class HospitalDto implements Serializable {
 
-	/**
-	 * This is the class Represents HospitalDto.
-	 * 
-	 * @author Shaik
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
