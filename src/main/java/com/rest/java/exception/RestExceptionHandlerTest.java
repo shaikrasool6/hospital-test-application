@@ -41,7 +41,7 @@ public class RestExceptionHandlerTest extends ResponseEntityExceptionHandler {
 */
 	@ExceptionHandler(HospitalCustomException.class)
 	public void springHandleNotFound(HttpServletResponse response) throws Exception {
-		response.sendError(HttpStatus.NOT_FOUND.value());
+		response.sendError(HttpStatus.BAD_REQUEST.value());
 	}
 	
 	
