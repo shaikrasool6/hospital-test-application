@@ -50,7 +50,7 @@ public class HospitalDto implements Serializable {
 	 */
 
 	@Column(length = 15, nullable = false, unique = true)
-	@Size(min = 0, max = 10)
+	@Size(min = 10, max = 10, message="enter 10 digit mobile number")
 	@Pattern(regexp = "(^$|[0-9]{10})", message = "provide valid phone no and it should be 10 digits")
 	private String phone;
 
@@ -59,7 +59,7 @@ public class HospitalDto implements Serializable {
 	 */
 
 	@Pattern(regexp = "(^$|[0-9]{8})", message = "provide valid fax no and it should be 8 digits")
-	@Size(min = 0, max = 8, message = "provide valid fax no")
+	@Size(min = 1, max = 8, message = "provide 8 digits fax number")
 	@Column(nullable = false, unique = true)
 	private String fax;
 
