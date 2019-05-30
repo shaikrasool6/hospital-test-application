@@ -31,6 +31,7 @@ public class HospitalDto implements Serializable {
 	 */
 
 	@Size(min = 3, max = 20, message = "Name must be between 3 and 20 characters")
+	@Pattern(regexp = "(^$|[a-zA-Z]{3,20})", message = "provide valid name in characters")
 	@NotNull(message = "it is already exists...please try to make sure ")
 	@NotEmpty(message = "please provide a name")
 	private String name;
