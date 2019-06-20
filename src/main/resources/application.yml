@@ -10,7 +10,7 @@ spring:
           hibernate.dialect: org.hibernate.dialect.MySQL5Dialect 
           format_sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
 ---
 spring:
   profiles: qa
@@ -25,7 +25,7 @@ spring:
       path: /h2Console
       
 server:
-  port: 8989 
+  port: 8080 
       
 ---
 spring:

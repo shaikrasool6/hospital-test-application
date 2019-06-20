@@ -2,6 +2,7 @@ package com.rest.java.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rest.java.dto.HospitalDto;
@@ -47,6 +50,8 @@ public class HospitalController {
 	 * @param dto
 	 * @return returns the HospitalDto
 	 */
+	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/addHospital")
 	public ResponseEntity<HospitalDto> addHospital(@Valid @RequestBody HospitalDto dto) {
 
@@ -85,6 +90,7 @@ public class HospitalController {
 	 * @param id
 	 * @return Response will return hospital
 	 */
+	@CrossOrigin(origins = "http://localhost:4200")
 	@DeleteMapping("/deleteHospital/{id}")
 	public ResponseEntity<HospitalDto> deleteHospitalById(@PathVariable("id") int id) {
 
@@ -103,6 +109,8 @@ public class HospitalController {
 	 * 
 	 * @return return the list of hospitals
 	 */
+	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/allHospitals")
 	public ResponseEntity<List<HospitalDto>> getAllHospitals() {
 
@@ -130,6 +138,7 @@ public class HospitalController {
 	 * @param dto
 	 * @return returns the updated HospitalDto
 	 */
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PutMapping("updateHospital")
 	public ResponseEntity<HospitalDto> updateHospital(@Valid @RequestBody HospitalDto dto) {
 		HospitalDto hospital = service.updateHospital(dto);
@@ -140,6 +149,26 @@ public class HospitalController {
 			return new ResponseEntity<HospitalDto>(HttpStatus.BAD_REQUEST);
 		}
 
+	}
+	
+	
+	@GetMapping(value="/serachHospitals")
+	public ResponseEntity<HospitalDto>searchHosptalsByNameAndEmail(@RequestParam("name") String name, HttpServletRequest req){
+		System.out.println("searching hospital by name");
+		String searchVal=req.getParameter("searchValue");
+		String searchOption=req.getParameter("searchOption");
+		if(searchOption!=null) {
+			System.out.println("from searching");
+			if(searchOption.equals("name")||searchOption.equals("email")) {
+				HospitalDto dto=(HospitalDto) service.searchHositals(searchVal, searchOption);
+				System.out.println("from search");
+				return new ResponseEntity<HospitalDto>( HttpStatus.OK);
+
+			}
+		}
+		return new ResponseEntity<HospitalDto>( HttpStatus.BAD_REQUEST);
+		
+		
 	}
 
 }

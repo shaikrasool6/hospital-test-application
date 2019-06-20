@@ -72,7 +72,7 @@ public class HospitalServiceImpl implements HospitalService {
 			return dto;
 		} else {
 			log.error("hospital cann't be updated with id= " + hospital.getHospId());
-			throw new HospitalCustomException(hospital.getHospId());
+			throw new HospitalCustomException(dto.getHospId());
 		}
 
 	}
@@ -175,4 +175,30 @@ public class HospitalServiceImpl implements HospitalService {
 		return dto;
 	}
 
+	@Override
+	public List<HospitalDto> searchHositals(String name, String searchValue) {
+		String criteria=null;
+		if(searchValue.equals(name)) {
+			criteria=criteria+"name";
+		}else {
+			criteria=criteria+"email";
+		}
+		List<HospitalDto> dtos = new ArrayList<>();
+
+		List<Hospital> hList = dao.searchHospital(name, criteria);
+
+
+		for (int i = 0; i < hList.size(); i++) {
+
+			HospitalDto dto = new HospitalDto();
+
+			BeanUtils.copyProperties(hList.get(i), dto);
+			log.debug("ListofAllHosptials called");
+			dtos.add(dto);
+		}
+
+		return dtos;
+	}
+
+	
 }

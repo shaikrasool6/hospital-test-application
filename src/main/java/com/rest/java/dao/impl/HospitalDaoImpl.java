@@ -91,4 +91,16 @@ public class HospitalDaoImpl implements HospitalDao {
 		return q.list();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Hospital> searchHospital(String name, String criteria) {
+		
+		Session session=sf.openSession();
+		Query q=session.createQuery("from hospital as h where h."+criteria+" like?");
+		q.setString(0, "%"+name+"%");
+		return q.list();
+		
+		
+	}
+
 }
