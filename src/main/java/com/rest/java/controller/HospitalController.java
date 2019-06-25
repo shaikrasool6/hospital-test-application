@@ -153,20 +153,27 @@ public class HospitalController {
 	
 	
 	@GetMapping(value="/serachHospitals")
-	public ResponseEntity<HospitalDto>searchHosptalsByNameAndEmail(@RequestParam("name") String name, HttpServletRequest req){
-		System.out.println("searching hospital by name");
-		String searchVal=req.getParameter("searchValue");
-		String searchOption=req.getParameter("searchOption");
-		if(searchOption!=null) {
-			System.out.println("from searching");
-			if(searchOption.equals("name")||searchOption.equals("email")) {
-				HospitalDto dto=(HospitalDto) service.searchHositals(searchVal, searchOption);
-				System.out.println("from search");
-				return new ResponseEntity<HospitalDto>( HttpStatus.OK);
-
-			}
-		}
-		return new ResponseEntity<HospitalDto>( HttpStatus.BAD_REQUEST);
+	public ResponseEntity<HospitalDto>searchHosptalsByName(@RequestParam("name") String name, HttpServletRequest req){
+		System.out.println("from search "+name);
+		HospitalDto dto=(HospitalDto) service.searchHositals(req.getParameter("name"));
+		System.out.println("hospital name= " +dto.getName());
+		return new ResponseEntity<HospitalDto>(dto, HttpStatus.OK);
+		
+		
+		
+		/*
+		 * System.out.println("searching hospital by name"); String
+		 * searchVal=req.getParameter("searchValue"); String
+		 * searchOption=req.getParameter("name"); if(searchOption!=null) {
+		 * System.out.println("from searching");
+		 * 
+		 * 
+		 * HospitalDto dto=(HospitalDto) service.searchHositals(searchVal,
+		 * searchOption); System.out.println("from search"); return new
+		 * ResponseEntity<HospitalDto>( HttpStatus.OK);
+		 * 
+		 * }
+		 */
 		
 		
 	}

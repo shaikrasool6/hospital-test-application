@@ -176,29 +176,15 @@ public class HospitalServiceImpl implements HospitalService {
 	}
 
 	@Override
-	public List<HospitalDto> searchHositals(String name, String searchValue) {
-		String criteria=null;
-		if(searchValue.equals(name)) {
-			criteria=criteria+"name";
-		}else {
-			criteria=criteria+"email";
-		}
-		List<HospitalDto> dtos = new ArrayList<>();
+	public HospitalDto searchHositals(String name) {
+		
+		Hospital hospital=dao.searchHospital(name);
+		HospitalDto dto = mapEntityToDto(hospital);
+		System.out.println(dto);
+		return dto;
+		
 
-		List<Hospital> hList = dao.searchHospital(name, criteria);
-
-
-		for (int i = 0; i < hList.size(); i++) {
-
-			HospitalDto dto = new HospitalDto();
-
-			BeanUtils.copyProperties(hList.get(i), dto);
-			log.debug("ListofAllHosptials called");
-			dtos.add(dto);
-		}
-
-		return dtos;
 	}
-
 	
 }
+

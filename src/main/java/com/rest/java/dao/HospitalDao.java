@@ -54,5 +54,5 @@ public interface HospitalDao {
 	public List<Hospital> getAllHospitals();
 
 	
-	public List<Hospital> searchHospital(String name, String email);
+	public Hospital searchHospital(String name);
 }

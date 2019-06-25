@@ -55,5 +55,5 @@ public interface HospitalService extends BaseDao<HospitalDto, Hospital> {
 	public List<HospitalDto> getAllHospitals();
 
 	
-	public List<HospitalDto> searchHositals(String name, String searchValue);
+	public HospitalDto searchHositals(String name);
 }
